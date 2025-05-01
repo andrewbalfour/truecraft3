@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrueCraft Roofing and Construction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+  <!-- Hero Section -->
+  <section class="bg-white text-center py-16 px-4">
+    <img src="/ChatGPT%20Image%20May%201%2C%202025%2C%2003_22_42%20PM.png" alt="TrueCraft Logo" class="mx-auto w-48 mb-6" />
+    <h1 class="text-4xl font-bold text-blue-900">Protecting Your Home with Excellence</h1>
+    <p class="text-lg text-red-700 mt-2">Roofing you can trust. Estimates you can afford.</p>
+    <a href="#contact" class="mt-6 inline-block px-6 py-3 bg-red-700 text-white font-bold rounded hover:bg-red-800">Get a Free Quote</a>
+  </section>
+
+  <!-- Services Section -->
+  <section class="bg-gray-100 py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold mb-8 text-blue-900">Our Services</h2>
+    <div class="grid gap-6 md:grid-cols-3">
+      <div><h3 class="text-xl font-semibold">Roof Replacement</h3></div>
+      <div><h3 class="text-xl font-semibold">Storm Damage Repair</h3></div>
+      <div><h3 class="text-xl font-semibold">Insurance Claims Support</h3></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold text-blue-900">About TrueCraft</h2>
+    <p class="mt-4 max-w-xl mx-auto">We are a family-owned business with over 10 years of roofing and construction experience, serving our community with honesty and quality craftsmanship.</p>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="bg-gray-100 py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold text-blue-900 mb-6">What Our Clients Say</h2>
+    <p class="max-w-xl mx-auto italic">"TrueCraft replaced our roof after a storm and made the process seamless. Highly recommend!" – Sarah G., Fort Worth</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="py-12 px-6 text-center">
+    <h2 class="text-3xl font-bold text-blue-900 mb-6">Request a Free Estimate</h2>
+    <form id="contactForm" class="max-w-lg mx-auto grid gap-4">
+      <input name="name" type="text" placeholder="Your Name" required class="p-3 border rounded" />
+      <input name="email" type="email" placeholder="Your Email" required class="p-3 border rounded" />
+      <input name="phone" type="text" placeholder="Your Phone" required class="p-3 border rounded" />
+      <textarea name="message" rows="4" placeholder="Your Message" class="p-3 border rounded"></textarea>
+      <button type="submit" class="bg-red-700 text-white px-6 py-3 rounded font-bold hover:bg-red-800">Send Message</button>
+    </form>
+    <p id="formResponse" class="mt-4"></p>
+  </section>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const message = document.getElementById('formResponse');
+      message.textContent = res.ok ? 'Thanks! We will contact you soon.' : 'Something went wrong. Please try again.';
+    });
+  </script>
+</body>
+</html>
